@@ -25,14 +25,12 @@ ingredients["drinks"].each_with_index do |ingredient, index|
   puts "Drink #{index+1}: #{Ingredient.all[index].name}"
 end
 
-c = 1
 5.times do
   puts "Creating Cocktail ..."
-  Cocktail.create(name:Faker::Beer.name, user_id:c)
+  Cocktail.create(name:Faker::Beer.name, user:User.all.sample)
   rand(2..5).times do
     Dose.create(description:Faker::Measurement.volume, cocktail:Cocktail.last, ingredient:Ingredient.all[rand(0..99)])
   end
   puts "#{Cocktail.last.name}\n#{Cocktail.last.doses}"
-  c += 1
 end
 
